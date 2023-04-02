@@ -1,0 +1,33 @@
+
+.text-glow.pink {
+  margin-top: 50px;
+  margin-left: 150px;
+  color: #ffbde5;
+  text-shadow: 0 0 10px #ed1cb9,0 0 20px #ed1cdc,0 0 30px #ed1cdc,0 0 40px #790072,0 0 70px #790072;
+font-family: 'Monoton';
+font-size: 6vw;
+
+}
+
+.neon-lit-background--poweroff:before {
+      opacity: .35
+  }
+  .neon-border--poweroff:before {
+      opacity: .25
+  }
+
+  .neon-border--poweroff h1 {
+      color: #333
+  }
+
+  .neon-border--poweroff h1 {
+      opacity: .75
+  }
+
+.container{
+  max-width: 80vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}

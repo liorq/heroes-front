@@ -1,0 +1,33 @@
+<div class="header-container">
+  <div class="container-login">
+    <div
+      *ngIf="!isUserLogged"
+      class="green-light-neon"
+      routerLink="/signIn"
+      (click)="deleteUserInfo()"
+    >
+      login
+    </div>
+    <div
+      *ngIf="isUserLogged"
+      class="log-out"
+      (click)="deleteUserInfo()"
+      routerLink="/signIn"
+    >
+      log-out
+    </div>
+    <div routerLink="/signUp" *ngIf="!isUserLogged">Sign Up</div>
+  </div>
+  <div class="container">
+    <div class="neon">heroes</div>
+    <div class="flux">project</div>
+  </div>
+  <div class="hero-actions-container">
+    <div *ngIf="isUserLogged" class="green-light-neon" routerLink="/myHeroes">
+      my Heroes
+    </div>
+    <div *ngIf="isUserLogged" class="green-light-neon" routerLink="/allHeroes">
+      add Heroes
+    </div>
+  </div>
+</div>

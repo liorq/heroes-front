@@ -1,0 +1,20 @@
+<div class="cards-container" >
+  <div class="text-effect" *ngIf="heroes?.length==0">
+    <h1 class="neon" data-text="You don't have heroes yet. Press the 'Add Heroes' button" contenteditable>You don't have heroes yet. Press the 'Add Heroes' button</h1>
+    <div class="gradient"></div>
+    <div class="spotlight"></div>
+  </div>
+  <div class="card-container" *ngFor="let hero of heroes; let i = index" >
+    <div  class="hero-picture" [ngClass]="this.heroesService.getHeroPicture(hero)"></div>
+    <div>name:{{ hero?.name }}</div>
+    <div>ability:{{ hero?.ability }}</div>
+    <div *ngIf="hero?.firstTrainedDay!=0">first Trained Day:{{ hero?.firstTrainedDay }}</div>
+    <div>Suit Colors:{{ hero?.SuitColors }}</div>
+    <div *ngIf="componentName=='myHeroes'">Starting Power:{{ hero?.StartingPower }} </div>
+    <div>Current Power:{{ hero?.CurrentPower }}</div>
+    <button  id="btn2" class="pulse" (click)="clickHandler(hero);sortHeroes();updateSubject();">{{displayBtnTitle}}</button>
+
+  </div>
+   </div>
+
+

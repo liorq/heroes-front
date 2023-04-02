@@ -1,0 +1,106 @@
+@import url(https://fonts.googleapis.com/css?family=Monoton);
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  display: table;
+}
+.header-container{
+  padding-right: 47px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.green-light-neon{
+  margin-right: 15px;
+}
+.container-login{
+color: #8BFDFE;
+display: flex;
+font-family: neon;
+color: #42fb98;
+font-size: 3vw;
+line-height: 3vw;
+text-shadow: 0 0 3vw #31f40a;
+margin-left: 25px;
+cursor: pointer;
+}
+@font-face {
+  font-family: neon;
+  src: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/707108/neon.ttf");
+}
+.container {
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.neon {
+  font-family: neon;
+  color: #FB4264;
+  font-size: 4vw;
+  line-height: 4vw;
+  text-shadow: 0 0 3vw #F40A35;
+}
+.flux {
+  font-family: neon;
+  color: #426DFB;
+  font-size: 4vw;
+  line-height:4vw;
+  text-shadow: 0 0 3vw #2356FF;
+}
+.neon {
+  animation: neon 1s ease infinite;
+  -moz-animation: neon 1s ease infinite;
+  -webkit-animation: neon 1s ease infinite;
+}
+@keyframes neon {
+  0%,
+  100% {
+    text-shadow: 0 0 1vw #FA1C16, 0 0 3vw #FA1C16, 0 0 10vw #FA1C16, 0 0 10vw #FA1C16, 0 0 .4vw #FED128, .5vw .5vw .1vw #806914;
+    color: #FED128;
+  }
+  50% {
+    text-shadow: 0 0 .5vw #800E0B, 0 0 1.5vw #800E0B, 0 0 5vw #800E0B, 0 0 5vw #800E0B, 0 0 .2vw #800E0B, .5vw .5vw .1vw #40340A;
+    color: #806914;
+  }
+}
+.flux {
+  animation: flux 2s linear infinite;
+  -moz-animation: flux 2s linear infinite;
+  -webkit-animation: flux 2s linear infinite;
+  -o-animation: flux 2s linear infinite;
+}
+.sign-in{
+  margin-right: 35px;
+}
+@keyframes flux {
+  0%,
+  100% {
+    text-shadow: 0 0 1vw #1041FF, 0 0 3vw #1041FF, 0 0 10vw #1041FF, 0 0 10vw #1041FF, 0 0 .4vw #8BFDFE, .5vw .5vw .1vw #147280;
+    color: #28D7FE;
+  }
+  50% {
+    text-shadow: 0 0 .5vw #082180, 0 0 1.5vw #082180, 0 0 5vw #082180, 0 0 5vw #082180, 0 0 .2vw #082180, .5vw .5vw .1vw #0A3940;
+    color: #146C80;
+  }
+}
+.hero-actions-container{
+  display: flex;
+  flex-direction: column;
+  color: #890f24;
+display: flex;
+font-family: neon;
+color: #fb4242;
+font-size: 3vw;
+line-height: 3vw;
+text-shadow: 0 0 3vw #d41730;
+margin-left: 25px;
+cursor: pointer;
+font-family: 'Monoton';
+font-size:3vw;
+}

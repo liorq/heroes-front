@@ -1,0 +1,15 @@
+app-main{
+  height: auto;
+}
+*{
+ display:flex ;
+justify-content: center;
+flex-direction: column;
+}
+app-footer{
+position: fixed;
+bottom: 0;
+left: 50%;
+transform: translate(-50%, 0);
+}
+

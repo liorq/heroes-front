@@ -1,0 +1,79 @@
+@import url(https://fonts.googleapis.com/css?family=Monoton);
+
+*, :after, :before {
+  box-sizing: border-box;
+
+}
+body {
+  background-image: url("https://static.pexels.com/photos/4303/red-bricks-texture-wall.jpg");
+  background-size: cover
+}
+.neon-lit-background:before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: #000;
+    opacity: 0;
+    transition: opacity .05s ease;
+}
+.neon-border {
+    display: block;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    z-index: 1;
+    color: #fff;
+    max-width: 100%;
+    overflow: visible;
+    width: 70vw;
+}
+.neon-border--blue:before {
+    box-shadow: 0 0 15px 4px #0080e2,0 0 120px 2px #004097,inset 0 0 15px 4px #0080e2,inset 0 0 100px 2px #004097;
+    border-color: #bde1ff;
+}
+.neon-border:before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    border: 2px solid #fff;
+    border-radius: 8px;
+    transition: opacity .05s ease;
+    z-index: -1;
+}
+.text-glow.pink {
+    color: #ffbde5;
+    text-shadow: 0 0 10px #ed1cdc,0 0 20px #ed1cdc,0 0 30px #ed1cdc,0 0 40px #790072,0 0 70px #790072;
+  font-family: 'Monoton';
+  font-size: 100px;
+}
+.neon-lit-background--poweroff:before {
+        opacity: .35
+    }
+    .neon-border--poweroff:before {
+        opacity: .25
+    }
+    .neon-border--poweroff h1 {
+        color: #333
+    }
+    .neon-border--poweroff h1 {
+        opacity: .75
+    }
+#a1,#a2{
+  z-index: -1;
+  font-size: 25px;
+}
+a{
+  text-decoration: none;
+}
+h1{
+  cursor: pointer;
+}
