@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { HeroesService } from 'src/app/service/heroes.service';
-import { LocalService } from 'src/app/service/local.service';
-import { UserInfoService } from 'src/app/service/user-info.service';
+import { HeroesService } from 'src/app/components/core/service/heroes.service';
+import { LocalService } from 'src/app/components/core/service/local.service';
+import { UserInfoService } from 'src/app/components/core/service/user-info.service';
 import Swal from 'sweetalert2';
 import { messages} from '../../../app.messages';
+import { MyDataService } from '../../core/service/myData.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -20,7 +21,8 @@ export class SignInComponent implements OnInit {
     private router: Router,
     private localService: LocalService,
     private userInfoService: UserInfoService,
-    private heroesService: HeroesService
+    private heroesService: HeroesService,
+    private myDataService:MyDataService
   ) {}
 
   ngOnInit(): void {
@@ -39,6 +41,8 @@ export class SignInComponent implements OnInit {
     );
     if (user.isValidInfo) {
       this.updateSubjects(user)
+      this.myDataService.signIn(this.userName,this.Password)
+
       this.router.navigate(['/myHeroes']);
     } else
        Swal.fire(messages.usernameIncorrectMessage);

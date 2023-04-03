@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { HeroesService } from 'src/app/service/heroes.service';
-import { LocalService } from 'src/app/service/local.service';
-import { UserInfoService } from 'src/app/service/user-info.service';
+import { HeroesService } from 'src/app/components/core/service/heroes.service';
+import { LocalService } from 'src/app/components/core/service/local.service';
+import { UserInfoService } from 'src/app/components/core/service/user-info.service';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',

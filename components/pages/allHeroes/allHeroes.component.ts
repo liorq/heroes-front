@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { getAllHeroes } from 'src/app/app-heroes';
 import { hero } from 'src/app/app.interfaces';
-import { HeroesService } from 'src/app/service/heroes.service';
-import { LocalService } from 'src/app/service/local.service';
-import { UserInfoService } from 'src/app/service/user-info.service';
+import { HeroesService } from 'src/app/components/core/service/heroes.service';
+import { LocalService } from 'src/app/components/core/service/local.service';
+import { UserInfoService } from 'src/app/components/core/service/user-info.service';
 @Component({
   selector: 'app-main',
   templateUrl: './allHeroes.component.html',

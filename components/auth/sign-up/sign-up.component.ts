@@ -8,10 +8,11 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
-import { LocalService } from 'src/app/service/local.service';
-import { UserInfoService } from 'src/app/service/user-info.service';
+import { LocalService } from 'src/app/components/core/service/local.service';
+import { UserInfoService } from 'src/app/components/core/service/user-info.service';
 import { messages } from 'src/app/app.messages';
-import { HeroesService } from 'src/app/service/heroes.service';
+import { HeroesService } from 'src/app/components/core/service/heroes.service';
+import { MyDataService } from '../../core/service/myData.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -26,7 +27,8 @@ export class SignUpComponent implements OnInit {
     private router: Router,
     private localService: LocalService,
     public userInfoService: UserInfoService,
-    private heroesService: HeroesService
+    private heroesService: HeroesService,
+    private myDataService: MyDataService
   ) {}
   subscribeForm!: FormGroup;
   firstName: any;
@@ -42,8 +44,13 @@ export class SignUpComponent implements OnInit {
     lastName: 'Last name must be at least 4 characters.',
     firstName: 'First name must be at least 4 characters.',
   };
-
+  onClick(){
+    this.myDataService.signIn("lior15241524665656@gmail.com","Llior1524")
+  }
   ngOnInit(): void {
+
+
+
     this.formInitialization();
     this.userInfoService.currentUserLogged.subscribe((name: any) => {
       this.localService.updateUserName(name);
@@ -90,9 +97,12 @@ export class SignUpComponent implements OnInit {
       Swal.fire(messages.usernameIsntAvailableMessage);
       return;
     }
+
     this.updateNewUser(newUser)
     this.updateSubjects(newUser)
     this.updateIndex()
+    this.myDataService.signUp(newUser)
+    this.myDataService.signIn(newUser.userName,newUser.password)
 
     Swal.fire(messages.usernameAddedMessage);
     setTimeout(() => {

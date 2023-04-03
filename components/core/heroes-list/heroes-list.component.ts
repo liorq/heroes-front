@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { LocalService } from 'src/app/service/local.service';
-import { UserInfoService } from 'src/app/service/user-info.service';
+import { LocalService } from 'src/app/components/core/service/local.service';
+import { UserInfoService } from 'src/app/components/core/service/user-info.service';
 import { hero } from '../../../app.interfaces';
-import { HeroesService } from '../../../service/heroes.service';
+import { HeroesService } from '../service/heroes.service';
 
 @Component({
   selector: 'app-heroes-list',
@@ -14,6 +14,7 @@ import { HeroesService } from '../../../service/heroes.service';
   ],
 })
 export class HeroesListComponent {
+  /////dont remove 2 of this
   constructor(
     public heroesService: HeroesService,
     private localService: LocalService,
