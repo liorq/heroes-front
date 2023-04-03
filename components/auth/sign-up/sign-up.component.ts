@@ -44,9 +44,7 @@ export class SignUpComponent implements OnInit {
     lastName: 'Last name must be at least 4 characters.',
     firstName: 'First name must be at least 4 characters.',
   };
-  onClick(){
-    this.myDataService.signIn("lior15241524665656@gmail.com","Llior1524")
-  }
+
   ngOnInit(): void {
 
 
@@ -101,8 +99,9 @@ export class SignUpComponent implements OnInit {
     this.updateNewUser(newUser)
     this.updateSubjects(newUser)
     this.updateIndex()
+    console.log(newUser)
     this.myDataService.signUp(newUser)
-    this.myDataService.signIn(newUser.userName,newUser.password)
+    this.myDataService.signIn(newUser.email,newUser.password)
 
     Swal.fire(messages.usernameAddedMessage);
     setTimeout(() => {

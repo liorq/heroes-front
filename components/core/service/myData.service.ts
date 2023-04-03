@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -12,14 +11,17 @@ export class MyDataService {
 ///signUp
 
  async signUp(user: any){
-
+  if (!user.email || !user.password) {
+    console.error("Missing username or password");
+    return;
+  }
       const data = {
-        username: user.username,
+        username: user.email,
         password: user.password,
         role: 'trainer'
       };
 
-      return this.http.post('/api/users/create', data).subscribe(
+      return await this.http.post(`${this.apiUrl}/signUp`, data).subscribe(
         response => {
           console.log(response);
           // Handle success response
@@ -34,11 +36,13 @@ export class MyDataService {
 
   ////signIn
   async signIn(userName: string, password: string) {
-    const formData = new FormData();
-    formData.append('username', userName);
-    formData.append('password', password);
 
-    return this.http.post<any>(`${this.apiUrl}/login`, formData).toPromise()
+    const data = {
+      username: userName,
+      password: password,
+      role: 'trainer'
+    };
+    return await this.http.post<any>(`${this.apiUrl}/login`, data).toPromise()
       .then(response => {
         console.log('Response:', response);
         // Handle successful response
