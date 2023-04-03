@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { LocalService } from 'src/app/components/core/service/local.service';
 import { UserInfoService } from 'src/app/components/core/service/user-info.service';
-import { hero } from '../../../app.interfaces';
+import { hero } from '../../data/app.interfaces';
 import { HeroesService } from '../service/heroes.service';
 
 @Component({

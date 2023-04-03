@@ -84,22 +84,18 @@ export class SignUpComponent implements OnInit {
     const isValidPassword = !passwordRegex.test(control.value);
     return isValidPassword ? { passwordInvalid: true } : null;
   }
+  ////handler
   signUp() {
     this.localService.initialDataBaseToDefault();
     const newUser = { ...this.subscribeForm.value };
-    const isAvailableUser = this.userInfoService.isUserAvailable(
-      newUser,
-      this.heroesService.usersData
-    );
-    if (!isAvailableUser) {
-      Swal.fire(messages.usernameIsntAvailableMessage);
-      return;
-    }
+    ////////
 
-    this.updateNewUser(newUser)
+
+
+    Swal.fire(messages.usernameIsntAvailableMessage);
+
+
     this.updateSubjects(newUser)
-    this.updateIndex()
-    console.log(newUser)
     this.myDataService.signUp(newUser)
     this.myDataService.signIn(newUser.email,newUser.password)
 

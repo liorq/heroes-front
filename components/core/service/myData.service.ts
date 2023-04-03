@@ -1,12 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MyDataService {
   private apiUrl = 'http://localhost:1012';
-  private token!:string;
+  private token:BehaviorSubject<string>=new BehaviorSubject("");
   constructor(private http: HttpClient) { }
 ///signUp
 
@@ -45,6 +46,8 @@ export class MyDataService {
     return await this.http.post<any>(`${this.apiUrl}/login`, data).toPromise()
       .then(response => {
         console.log('Response:', response);
+        this.token=response.access_token;
+        console.log(this.token)
         // Handle successful response
       })
       .catch(error => {
