@@ -10,8 +10,10 @@ export class LocalService {
 
 
   isUserLogged() {
-    return localStorage.getItem('token');
-  }
+      const token = localStorage.getItem('token');
+      return token !== null && token !== undefined&&token!="";
+
+    }
 
 
 

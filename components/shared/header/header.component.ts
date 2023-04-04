@@ -16,9 +16,14 @@ export class HeaderComponent implements OnInit {
 
   ) {}
   ngOnInit(): void {
+
+
     this.userInfoService.isUserLogged.subscribe((isUserLogged) => {
-      this.isUserLogged = isUserLogged;
+      this.isUserLogged = isUserLogged
     });
+    if(this.localService.isUserLogged()){
+      this.isUserLogged=  this.localService.isUserLogged()
+    }
   }
   deleteUserInfo() {
     this.userInfoService.isUserLogged.next(false);

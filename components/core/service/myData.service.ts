@@ -69,10 +69,8 @@ async signUp(userName: string, password: string) {
 
   try {
     const response = await this.http.post(`${this.apiUrl}/users/${this.userName}/heroes/${nameOfHero}`, null, { headers }).toPromise();
-    console.log(response);
     return response;
   } catch (error) {
-    console.log(error);
     return error;
   }
 }
@@ -83,11 +81,9 @@ async trainHero(heroName: string) {
   const headers = this.headerInit()
   try{
     const response:any = await this.http.patch(`${this.apiUrl}/users/${this.userName}/heroes/${heroName}`, null,{headers})?.toPromise();
-    console.log(response);
     return response?.status==200;;
 
   } catch (error:any) {
-    console.log(error);
    return error?.status==200;
   }
 }
@@ -95,7 +91,7 @@ async trainHero(heroName: string) {
 
 headerInit (){
   return  new HttpHeaders({
-    'Authorization': 'Bearer ' + this.token.getValue()
+    'Authorization': 'Bearer ' + (this.token.getValue()||localStorage.getItem('token'))
   });
 
 }

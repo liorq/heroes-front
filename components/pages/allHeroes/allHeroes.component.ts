@@ -22,7 +22,7 @@ export class AllHeroesComponent implements OnInit {
     private myDataService: MyDataService
   ) {}
 
-  ngOnInit(): void {
+  async ngOnInit() {
 
     this.localService.initialDataBaseToDefault();
     const isUserLogged = this.localService.isUserLogged();
@@ -30,8 +30,8 @@ export class AllHeroesComponent implements OnInit {
     this.heroesData=getAllHeroes();
 
      this.heroesService.currentHeroesData.subscribe((currentUserHeroesData:hero[])=>{
-   this.currentHeroesData=currentUserHeroesData;
-     console.log(currentUserHeroesData)
+    this.currentHeroesData=currentUserHeroesData||this.myDataService.getAllUserHeroes();
+
     })
 
   }

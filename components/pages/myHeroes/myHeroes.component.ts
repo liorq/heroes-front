@@ -28,7 +28,8 @@ export class MyHeroesComponent implements OnInit {
     if (this.localService.isUserLogged())
 
     this.heroesService.currentHeroesData.subscribe((currentUserHeroesData: hero[]) => {
-     this.currentHeroesData = currentUserHeroesData
+     this.currentHeroesData = currentUserHeroesData||this.myDataService.getAllUserHeroes()
+     console.log(this.currentHeroesData)
     });
 
   }
