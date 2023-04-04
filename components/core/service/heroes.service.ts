@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
 import Swal from 'sweetalert2';
-import { hero, user } from '../../data/app.interfaces';
+import { hero } from '../../data/app.interfaces';
 import {messages} from '../../../app.messages';
 @Injectable({
   providedIn: 'root',

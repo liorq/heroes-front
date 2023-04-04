@@ -21,7 +21,6 @@ export class HeaderComponent implements OnInit {
     });
   }
   deleteUserInfo() {
-    this.localService.deleteUserInfo();
     this.userInfoService.isUserLogged.next(false);
     this.heroesService.currentHeroesData.next([])
     this.localService.setToken();
