@@ -8,20 +8,17 @@ import {messages} from '../../../app.messages';
 })
 
 export class HeroesService {
-  usersData: any ;
+
   currentHeroesData=new BehaviorSubject<hero[]>([]);
 
   isAddedHeroPossible(addedHero: hero,HeroesData:hero[]){
 
-    for (let hero of HeroesData) {
-      if (hero.name == addedHero.name) {
-        Swal.fire(messages.heroExistsMessage);
-        return
-      }
-    }
-    Swal.fire(messages.heroAdded);
-    return true
+    const isHeroExists = HeroesData.some(hero => hero.name === addedHero.name);
+    Swal.fire(isHeroExists?messages.heroExistsMessage:messages.heroAdded);
+     return !isHeroExists
   }
+
+
   getHeroPicture(hero: hero) {
     const obj: any = {};
     obj[hero.name] = true;
@@ -32,14 +29,9 @@ export class HeroesService {
 
   IsPossibleToTrainTheHero(currentHero: hero){
     const date = this.getCurrentDate()
-
-    if (currentHero.amountOfTimeHeroTrained >= 5 &&currentHero.lastTimeHeroTrained == date) {
-      Swal.fire(messages.maximumTrained);
-      return false
-    }
-    Swal.fire(messages.heroTrained);
-
-    return true
+    const IsntPossibleToTrain=currentHero.amountOfTimeHeroTrained >= 5 &&currentHero.lastTimeHeroTrained == date
+    Swal.fire(!IsntPossibleToTrain?messages.heroTrained:messages.maximumTrained);
+    return !IsntPossibleToTrain
   }
 
   trainHero(currentHero: hero){

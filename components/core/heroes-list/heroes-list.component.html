@@ -10,8 +10,8 @@
     <div>ability:{{ hero?.ability }}</div>
     <div *ngIf="hero?.firstDayHeroTrained!=0">first Trained Day:{{ hero?.firstDayHeroTrained }}</div>
     <div>Suit Colors:{{ hero?.suitColors }}</div>
-    <div *ngIf="componentName=='myHeroes'">Starting Power:{{ hero?.startingPower }} </div>
-    <div>Current Power:{{ hero?.currentPower }}</div>
+    <div *ngIf="componentName=='myHeroes'">Starting Power:{{ hero?.startingPower| number:'1.0-0' }} </div>
+    <div>Current Power:{{ hero?.currentPower| number:'1.0-0' }}</div>
     <button  id="btn2" class="pulse" (click)="clickHandler(hero);sortHeroes();updateSubject();">{{displayBtnTitle}}</button>
 
   </div>

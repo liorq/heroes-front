@@ -6,27 +6,19 @@ import { Injectable } from '@angular/core';
 
 export class LocalService {
 
-
-
-
   isUserLogged() {
       const token = localStorage.getItem('token');
       return token !== null && token !== undefined&&token!="";
-
     }
 
 
 
-
-  getToken() {
-    return localStorage.getItem('token');
-  }
   setToken() {
     return localStorage.setItem('token' ,"");
-
   }
+
   initialDataBaseToDefault() {
-    if (this.getToken() === undefined)
-    this.setToken();
+    if (localStorage.getItem('token') === undefined)
+    this.setToken()
   }
 }

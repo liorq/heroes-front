@@ -33,7 +33,7 @@
   z-index: 10;
 }
 .gradient {
-  background: linear-gradient(45deg, red, blue);
+  background: linear-gradient(45deg, rgb(91, 33, 33), rgb(66, 66, 110));
   mix-blend-mode: multiply;
 }
 .spotlight {

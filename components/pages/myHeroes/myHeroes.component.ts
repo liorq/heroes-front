@@ -31,10 +31,12 @@ export class MyHeroesComponent implements OnInit {
 
     });
 
+      this.loadUserHeroes();
   }
   ////function that do next observable is called
   async loadUserHeroes(){
-    if(this.localService.isUserLogged()){
+
+    if(this.localService.isUserLogged()&&this.currentHeroesData.length == 0){
       const array=await this.myDataService.getAllUserHeroes()
       if(Array.isArray(array))
       this.heroesService.currentHeroesData.next(array)

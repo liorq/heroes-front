@@ -31,18 +31,17 @@ export class AllHeroesComponent implements OnInit {
      this.heroesService.currentHeroesData.subscribe((currentUserHeroesData:hero[])=>{
     this.currentHeroesData=currentUserHeroesData;
     })
-
    this.loadUserHeroes()
 
   }
 
   async loadUserHeroes(){
-    if(this.localService.isUserLogged()){
+    if(this.localService.isUserLogged()&&this.currentHeroesData.length == 0){
       const array=await this.myDataService.getAllUserHeroes()
       if(Array.isArray(array))
       this.heroesService.currentHeroesData.next(array)
    }
-   
+
   }
 
   addHero(addedHero: any) {

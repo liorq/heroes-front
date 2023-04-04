@@ -112,7 +112,7 @@ gap: 5px;
 .card-container:hover{
   animation: gradient 3s ease 0s 1 normal forwards;
   /* background: linear-gradient(-45deg, #ee7752, #e73cdc, #9a23d5, #d52326,#d2c534); */
-  background: linear-gradient(135deg,rgba(0,0,0,0.95)0%,rgba(0,0,0,0.95)25%,rgba(0,23,149,0.95)50%,rgba(255,0,0,0.95)75%,rgba(0,23,149,0.95)100%);
+  background: linear-gradient(135deg,rgba(0,0,0,0.95)0%,rgba(0,0,0,0.95)25%,rgba(74, 86, 151, 0.95)50%,rgba(192, 86, 86, 0.95)75%,rgba(0,23,149,0.95)100%);
   color: #fff;
 }
 
