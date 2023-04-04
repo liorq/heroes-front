@@ -7,8 +7,10 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class MyDataService {
   private apiUrl = 'http://localhost:1012';
-  private token:BehaviorSubject<string>=new BehaviorSubject('');
   private userName!:string;
+  token:BehaviorSubject<string>=new BehaviorSubject('');
+  _token = this.token.asObservable();
+
   constructor(private http: HttpClient) { }
 
 async signUp(userName: string, password: string) {

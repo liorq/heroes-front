@@ -9,8 +9,12 @@ import {messages} from '../../../app.messages';
 
 export class HeroesService {
 
-  currentHeroesData=new BehaviorSubject<hero[]>([]);
+  private currentHeroesData=new BehaviorSubject<hero[]>([]);
+  _currentHeroesData = this.currentHeroesData.asObservable();
 
+  updateHeroesSubject(currentHeroesData:hero[]){
+  this.currentHeroesData.next(currentHeroesData)
+  }
   isAddedHeroPossible(addedHero: hero,HeroesData:hero[]){
 
     const isHeroExists = HeroesData.some(hero => hero.name === addedHero.name);

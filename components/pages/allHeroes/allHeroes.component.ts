@@ -28,7 +28,7 @@ export class AllHeroesComponent implements OnInit {
 
      this.heroesData=getAllHeroes();
 
-     this.heroesService.currentHeroesData.subscribe((currentUserHeroesData:hero[])=>{
+     this.heroesService._currentHeroesData.subscribe((currentUserHeroesData:hero[])=>{
     this.currentHeroesData=currentUserHeroesData;
     })
    this.loadUserHeroes()
@@ -39,7 +39,8 @@ export class AllHeroesComponent implements OnInit {
     if(this.localService.isUserLogged()&&this.currentHeroesData.length == 0){
       const array=await this.myDataService.getAllUserHeroes()
       if(Array.isArray(array))
-      this.heroesService.currentHeroesData.next(array)
+      this.heroesService.updateHeroesSubject(array)
+
    }
 
   }
@@ -50,8 +51,8 @@ export class AllHeroesComponent implements OnInit {
       this.myDataService.addHero(addedHero.name)
       addedHero.id = Math.floor(Math.random() * 1000000000);
       this.currentHeroesData.push(addedHero)
+      this.heroesService.updateHeroesSubject([... this.currentHeroesData])
 
-      this.heroesService.currentHeroesData.next([... this.currentHeroesData]);
     }
 
 }

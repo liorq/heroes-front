@@ -22,12 +22,12 @@ export class HeaderComponent implements OnInit {
       this.isUserLogged = isUserLogged
     });
     if(this.localService.isUserLogged()){
-      this.isUserLogged=  this.localService.isUserLogged()
+      this.isUserLogged=this.localService.isUserLogged()
     }
   }
   deleteUserInfo() {
     this.userInfoService.isUserLogged.next(false);
-    this.heroesService.currentHeroesData.next([])
+    this.heroesService.updateHeroesSubject([])
     this.localService.setToken();
 
   }

@@ -26,7 +26,7 @@ export class MyHeroesComponent implements OnInit {
   ngOnInit() {
     this.localService.initialDataBaseToDefault();
 
-    this.heroesService.currentHeroesData.subscribe((currentUserHeroesData: hero[]) => {
+    this.heroesService._currentHeroesData.subscribe((currentUserHeroesData: hero[]) => {
      this.currentHeroesData = currentUserHeroesData;
 
     });
@@ -39,7 +39,8 @@ export class MyHeroesComponent implements OnInit {
     if(this.localService.isUserLogged()&&this.currentHeroesData.length == 0){
       const array=await this.myDataService.getAllUserHeroes()
       if(Array.isArray(array))
-      this.heroesService.currentHeroesData.next(array)
+      this.heroesService.updateHeroesSubject(array)
+
    }
   }
   clickBtnHandler(currentHero: any) {

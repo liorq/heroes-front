@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { hero } from '../../data/app.interfaces';
 
 
 @Injectable({
@@ -8,8 +9,8 @@ import { BehaviorSubject } from 'rxjs';
 export class UserInfoService {
 
 
-  isUserLogged = new BehaviorSubject<boolean>(false);
-
+   isUserLogged = new BehaviorSubject<boolean>(false);
+  _isUserLogged = this.isUserLogged.asObservable();
   getInvalidMessage(errors:any,property:string,error:keyof typeof errors,errorMessage:string){
     if (errors?.required) {
       return `You must enter your ${property}`;
