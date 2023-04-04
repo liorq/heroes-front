@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
@@ -7,80 +7,98 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class MyDataService {
   private apiUrl = 'http://localhost:1012';
-  private token:BehaviorSubject<string>=new BehaviorSubject("");
+  private token:BehaviorSubject<string>=new BehaviorSubject('');
+  private userName!:string;
   constructor(private http: HttpClient) { }
-///signUp
 
- async signUp(user: any){
-  if (!user.email || !user.password) {
-    console.error("Missing username or password");
-    return;
+async signUp(userName: string, password: string) {
+  const data = {
+    username: userName,
+    password: password,
+    role: 'trainer'
+  };
+
+  try {
+    const response:any = await this.http.post(`${this.apiUrl}/signUp`, data).toPromise();
+    return response?.status === 200;
+  } catch (error:any) {
+    return error?.status === 200;
   }
-      const data = {
-        username: user.email,
-        password: user.password,
-        role: 'trainer'
-      };
+}
 
-      return await this.http.post(`${this.apiUrl}/signUp`, data).subscribe(
-        response => {
-          console.log(response);
-          // Handle success response
-        },
-        error => {
-          console.error(error);
-          // Handle error response
-        }
-      );
 
-  }
-
-  ////signIn
-  async signIn(userName: string, password: string) {
+  async signInHandler(userName: string, password: string): Promise<boolean> {
 
     const data = {
       username: userName,
       password: password,
       role: 'trainer'
     };
-    return await this.http.post<any>(`${this.apiUrl}/login`, data).toPromise()
-      .then(response => {
-        console.log('Response:', response);
-        this.token=response.access_token;
-        console.log(this.token)
-        // Handle successful response
-      })
-      .catch(error => {
-        console.error('Error:', error);
-        // Handle error response
-      });
+    this.userName = userName;
+
+    try {
+      const response = await this.http.post<any>(`${this.apiUrl}/login`, data).toPromise();
+
+      this.token.next(response?.access_token);
+      localStorage.setItem('token', response?.access_token);
+      return true;
+    } catch (error: any) {
+      return false;
+    }
   }
 
+ async getAllUserHeroes() {
+
+  const headers = this.headerInit()
 
 
- ////getAllHero
- getAllHero() {
-    return this.http.get<any[]>(`${this.apiUrl}/items`);
+  try {
+    const response = await this.http.get(`${this.apiUrl}/users/${this.userName}/heroes`, { headers })?.toPromise();
+    return response;
+  } catch (error) {
+    return false;
   }
- ////getHero
+}
 
- getHero(id: number) {
-    return this.http.get<any>(`${this.apiUrl}/items/${id}`);
-  }
- ////addHero
 
- addHero(item: any) {
-    return this.http.post<any>(`${this.apiUrl}/items`, item);
-  }
- ////trainHero
 
- trainHero(id: number, item: any) {
-    return this.http.put<any>(`${this.apiUrl}/items/${id}`, item);
-  }
- ////deleteItem
 
-  deleteItem(id: number) {
-    return this.http.delete<any>(`${this.apiUrl}/items/${id}`);
+
+ async addHero(nameOfHero: string) {
+  const headers = this.headerInit()
+
+  try {
+    const response = await this.http.post(`${this.apiUrl}/users/${this.userName}/heroes/${nameOfHero}`, null, { headers }).toPromise();
+    console.log(response);
+    return response;
+  } catch (error) {
+    console.log(error);
+    return error;
   }
+}
+
+
+async trainHero(heroName: string) {
+
+  const headers = this.headerInit()
+  try{
+    const response:any = await this.http.patch(`${this.apiUrl}/users/${this.userName}/heroes/${heroName}`, null,{headers})?.toPromise();
+    console.log(response);
+    return response?.status==200;;
+
+  } catch (error:any) {
+    console.log(error);
+   return error?.status==200;
+  }
+}
+
+
+headerInit (){
+  return  new HttpHeaders({
+    'Authorization': 'Bearer ' + this.token.getValue()
+  });
+
+}
+
 
 }

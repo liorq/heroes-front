@@ -27,31 +27,31 @@ export class SignInComponent implements OnInit {
 
   ngOnInit(): void {
     this.localService.initialDataBaseToDefault();
-    this.heroesService.usersData=JSON.parse(this.localService.getUsersData()||"[]")
-    this.userInfoService.currentUserLogged.subscribe((name: any) => {
-      this.localService.updateUserName(name);
-    });
+
   }
 
-  isValidUserInformation() {
-    const user = this.userInfoService.isValidUserInformation(
-      this.userName,
-      this.Password,
-      this.heroesService.usersData
-    );
-    if (user.isValidInfo) {
-      this.updateSubjects(user)
-      this.myDataService.signIn(this.userName,this.Password)
+ async isValidUserInformation() {
+    const user ={
+      user:this.userName,
+      password:this.Password,
+    }
 
-      this.router.navigate(['/myHeroes']);
-    } else
+    const isValidInfo= await this.myDataService.signInHandler(this.userName,this.Password)
+    console.log(isValidInfo)
+    if(isValidInfo){
+    const heroes:any= await this.myDataService.getAllUserHeroes()
+     this.updateSubjects(heroes)
+     this.router.navigate(['/myHeroes']);
+     return
+     }
+
+
+
        Swal.fire(messages.usernameIncorrectMessage);
   }
 
-  updateSubjects(user:any){
+  updateSubjects(heroes:any[]){
     this.userInfoService.isUserLogged.next(true);
-    this.userInfoService.currentUserLogged.next(user.email);
-    const currentHeroesData= this.localService.getLocalUserHeroData();
-    this.heroesService.currentHeroesData.next([...currentHeroesData])
+    this.heroesService.currentHeroesData.next(heroes)
   }
 }

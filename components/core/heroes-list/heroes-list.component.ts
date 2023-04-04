@@ -3,6 +3,7 @@ import { LocalService } from 'src/app/components/core/service/local.service';
 import { UserInfoService } from 'src/app/components/core/service/user-info.service';
 import { hero } from '../../data/app.interfaces';
 import { HeroesService } from '../service/heroes.service';
+import { MyDataService } from '../service/myData.service';
 
 @Component({
   selector: 'app-heroes-list',
@@ -14,11 +15,12 @@ import { HeroesService } from '../service/heroes.service';
   ],
 })
 export class HeroesListComponent {
-  /////dont remove 2 of this
+  /////dont remove 3 of this
   constructor(
     public heroesService: HeroesService,
     private localService: LocalService,
-    private userInfoService: UserInfoService
+    private userInfoService: UserInfoService,
+    private myDataService: MyDataService
   ) {}
 
   @Input() heroes?: hero[] = [];
@@ -33,7 +35,7 @@ export class HeroesListComponent {
 }
   sortHeroes(){
     if(this.heroes)
-    this.heroes.sort((heroA:hero,heroB:hero)=>heroB.CurrentPower-heroA.CurrentPower)
+    this.heroes.sort((heroA:hero,heroB:hero)=>heroB.currentPower-heroA.currentPower)
   }
 
 }

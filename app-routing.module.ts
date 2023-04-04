@@ -5,10 +5,11 @@ import { SignUpComponent } from './components/auth/sign-up/sign-up.component';
 import { SignInComponent } from './components/auth/sign-in/sign-in.component';
 import { PageNotFoundComponent } from './components/pages/page-not-found/page-not-found.component';
 import { AllHeroesComponent } from './components/pages/allHeroes/allHeroes.component';
+import { AuthGuard } from './auth.guard';
 const routes: Routes = [
   { path: 'signUp', component: SignUpComponent },
-  { path: 'myHeroes', component: MyHeroesComponent },
-  { path: 'allHeroes', component: AllHeroesComponent },
+  { path: 'myHeroes', component: MyHeroesComponent, canActivate: [AuthGuard] },
+  { path: 'allHeroes', component: AllHeroesComponent, canActivate: [AuthGuard] },
   { path: 'signIn', component: SignInComponent },
   { path: '', component: SignInComponent, pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent },
@@ -17,6 +18,6 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
-  providers: [],
+  providers: [AuthGuard],
 })
 export class AppRoutingModule {}

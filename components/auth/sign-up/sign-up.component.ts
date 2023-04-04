@@ -46,13 +46,7 @@ export class SignUpComponent implements OnInit {
   };
 
   ngOnInit(): void {
-
-
-
     this.formInitialization();
-    this.userInfoService.currentUserLogged.subscribe((name: any) => {
-      this.localService.updateUserName(name);
-    });
   }
 
   formInitialization() {
@@ -85,40 +79,27 @@ export class SignUpComponent implements OnInit {
     return isValidPassword ? { passwordInvalid: true } : null;
   }
   ////handler
-  signUp() {
+  async signUp() {
     this.localService.initialDataBaseToDefault();
     const newUser = { ...this.subscribeForm.value };
-    ////////
 
-
-
-    Swal.fire(messages.usernameIsntAvailableMessage);
-
-
-    this.updateSubjects(newUser)
-    this.myDataService.signUp(newUser)
-    this.myDataService.signIn(newUser.email,newUser.password)
-
-    Swal.fire(messages.usernameAddedMessage);
-    setTimeout(() => {
-      this.router.navigate(['/myHeroes']);
-    }, 2000);
-
+      const isUserAvailable = await this.myDataService.signUp(newUser.email, newUser.password);
+      if (isUserAvailable) {
+        await this.myDataService.signInHandler(newUser.email, newUser.password);
+        this.updateSubjects()
+        setTimeout(() => {
+          this.router.navigate(['/myHeroes']);
+        }, 2000);
+      }
+      console.log( isUserAvailable )
+        Swal.fire(isUserAvailable?messages.usernameAddedMessage:messages.usernameIsntAvailableMessage)
   }
-  updateIndex(){
-    const usersDataLength: any =this.heroesService.usersData.length
-    this.localService.setIndex(usersDataLength === '' ? 0 : usersDataLength - 1);
-  }
-  updateSubjects(newUser:any){
+
+
+
+  updateSubjects(){
     this.userInfoService.isUserLogged.next(true);
-    this.userInfoService.currentUserLogged.next(newUser.email);
+    this.heroesService.currentHeroesData.next([])
   }
-  updateNewUser(newUser:any){
-    this.heroesService.usersData.push({
-      email: newUser.email,
-      password: newUser.password,
-      heroes: [],
-    });
-    this.localService.setUsersData([...this.heroesService.usersData]);
-  }
+
 }

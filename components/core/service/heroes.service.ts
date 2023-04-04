@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 import Swal from 'sweetalert2';
 import { hero, user } from '../../data/app.interfaces';
 import {messages} from '../../../app.messages';
@@ -9,9 +9,10 @@ import {messages} from '../../../app.messages';
 
 export class HeroesService {
   usersData: any ;
-  currentHeroesData=new Subject<hero[]>();
+  currentHeroesData=new BehaviorSubject<hero[]>([]);
 
   isAddedHeroPossible(addedHero: hero,HeroesData:hero[]){
+
     for (let hero of HeroesData) {
       if (hero.name == addedHero.name) {
         Swal.fire(messages.heroExistsMessage);
@@ -27,39 +28,54 @@ export class HeroesService {
     return obj;
   }
 
-  IsPossibleToTrainTheHero(currentHero: hero,date:string){
-    if (currentHero.HerosTrainingTimes >= 5 &&currentHero.lastTimeTrained == date) {
+
+
+  IsPossibleToTrainTheHero(currentHero: hero){
+    const date = this.getCurrentDate()
+
+    if (currentHero.amountOfTimeHeroTrained >= 5 &&currentHero.lastTimeHeroTrained == date) {
       Swal.fire(messages.maximumTrained);
       return false
     }
+    Swal.fire(messages.heroTrained);
+
     return true
   }
 
-  trainHero(currentHero: hero,date:string){
-    if (currentHero.firstTrainedDay == 0)
-         currentHero.firstTrainedDay = date;
+  trainHero(currentHero: hero){
 
-    if (currentHero.lastTimeTrained != undefined)
-         currentHero.lastTimeTrained = date;
+    const date = this.getCurrentDate()
 
-    if (currentHero.lastTimeTrained != date) {
-         currentHero.HerosTrainingTimes = 0;
-         currentHero.lastTimeTrained = date;
+    if (currentHero.firstDayHeroTrained == 0)
+         currentHero.firstDayHeroTrained = date;
+
+    if (currentHero.lastTimeHeroTrained != undefined)
+         currentHero.lastTimeHeroTrained = date;
+
+    if (currentHero.lastTimeHeroTrained != date) {
+         currentHero.amountOfTimeHeroTrained = 0;
+         currentHero.lastTimeHeroTrained = date;
     }
-        currentHero.HerosTrainingTimes++;
-        currentHero.CurrentPower = Math.floor(
-        currentHero.CurrentPower * (1 + Math.random() * 0.1));
+
+        currentHero.amountOfTimeHeroTrained++;
+        currentHero.currentPower = Math.floor(
+        currentHero.currentPower * (1 + Math.random() * 0.1));
   }
 
   clickBtnHandler(currentHero: hero) {
-    const dt = new Date();
-    const date =dt.getFullYear() + '/' + (dt.getMonth() + 1) + '/' + dt.getDate();
 
-    if(!this.IsPossibleToTrainTheHero(currentHero,date))
+    if(!this.IsPossibleToTrainTheHero(currentHero))
       return false
 
-    this.trainHero(currentHero,date)
+    this.trainHero(currentHero)
       return true
+  }
+  getCurrentDate(){
+    const dt = new Date();
+    const year = dt.getFullYear().toString();
+    const month = (dt.getMonth() + 1).toString().padStart(2, '0');
+    const day = dt.getDate().toString().padStart(2, '0');
+    return `${year}-${month}-${day}`;
   }
 
 }

@@ -2,12 +2,12 @@ export interface hero {
   name: string;
   ability: string;
   id: number;
-  firstTrainedDay: any;
-  SuitColors: string;
-  StartingPower: number;
-  CurrentPower: number;
-  lastTimeTrained: any;
-  HerosTrainingTimes: number;
+  firstDayHeroTrained: any;
+  suitColors: string;
+  startingPower: number;
+  currentPower: number;
+  lastTimeHeroTrained: any;
+  amountOfTimeHeroTrained: number;
 }
 export interface user {
   firstName: string;

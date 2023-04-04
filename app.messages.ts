@@ -43,5 +43,11 @@ export const messages: any = {
     iconHtml: '=(',
     confirmButtonText: 'ok',
     showCloseButton: true,
+  },heroTrained: {
+    title:
+      'Hero trained successfully.',
+    iconHtml: '=)',
+    confirmButtonText: 'ok',
+    showCloseButton: true,
   },
 };

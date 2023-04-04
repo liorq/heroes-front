@@ -3,6 +3,7 @@ import { hero } from '../../data/app.interfaces';
 import { HeroesService } from 'src/app/components/core/service/heroes.service';
 import { LocalService } from 'src/app/components/core/service/local.service';
 import { UserInfoService } from 'src/app/components/core/service/user-info.service';
+import { MyDataService } from '../../core/service/myData.service';
 
 @Component({
   selector: 'app-myHeroes',
@@ -16,7 +17,8 @@ export class MyHeroesComponent implements OnInit {
   constructor(
     public heroesService: HeroesService,
     public localService: LocalService,
-    public userInfoService: UserInfoService
+    public userInfoService: UserInfoService,
+    private myDataService: MyDataService
   ) {}
 
   currentHeroesData: any = [];
@@ -24,26 +26,22 @@ export class MyHeroesComponent implements OnInit {
   ngOnInit() {
     this.localService.initialDataBaseToDefault();
     if (this.localService.isUserLogged())
-      this.UpdateUserHeroDataFromLocalStorage();
 
     this.heroesService.currentHeroesData.subscribe((currentUserHeroesData: hero[]) => {
-        this.localService.updateLocalUserHeroes([...currentUserHeroesData]);
-      });
+     this.currentHeroesData = currentUserHeroesData
+    });
 
-    this.currentHeroesData = this.localService.getLocalUserHeroData();
-  }
-
-  UpdateUserHeroDataFromLocalStorage() {
-    const data = this.localService.getLocalUserHeroData();
-    this.heroesService.currentHeroesData.next([...data]);
-    this.userInfoService.isUserLogged.next(true);
   }
 
   clickBtnHandler(currentHero: any) {
-    this.heroesService.clickBtnHandler(currentHero);
+
+    if(this.heroesService.IsPossibleToTrainTheHero(currentHero)){
+      this.heroesService.clickBtnHandler(currentHero);
+      this.myDataService.trainHero(currentHero.name)
+    }
+
+
   }
 
-  updateUserHeroes(currentHeroData: any[]) {
-    this.localService.updateLocalUserHeroes(currentHeroData);
-  }
+
 }
