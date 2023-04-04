@@ -39,8 +39,6 @@ export class MyHeroesComponent implements OnInit {
       this.heroesService.clickBtnHandler(currentHero);
       this.myDataService.trainHero(currentHero.name)
     }
-
-
   }
 
 

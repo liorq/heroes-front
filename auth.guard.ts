@@ -15,7 +15,6 @@ export class AuthGuard implements CanActivate, CanLoad {
       return true;
     }
     else {
-      // If the token is not present, redirect the user to the login page
       return this.router.navigate(['/signIn']);
     }
   }
