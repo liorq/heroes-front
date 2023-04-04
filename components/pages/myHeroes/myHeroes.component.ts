@@ -25,15 +25,21 @@ export class MyHeroesComponent implements OnInit {
 
   ngOnInit() {
     this.localService.initialDataBaseToDefault();
-    if (this.localService.isUserLogged())
 
     this.heroesService.currentHeroesData.subscribe((currentUserHeroesData: hero[]) => {
-     this.currentHeroesData = currentUserHeroesData||this.myDataService.getAllUserHeroes()
-     console.log(this.currentHeroesData)
+     this.currentHeroesData = currentUserHeroesData;
+
     });
 
   }
-
+  ////function that do next observable is called
+  async loadUserHeroes(){
+    if(this.localService.isUserLogged()){
+      const array=await this.myDataService.getAllUserHeroes()
+      if(Array.isArray(array))
+      this.heroesService.currentHeroesData.next(array)
+   }
+  }
   clickBtnHandler(currentHero: any) {
 
     if(this.heroesService.IsPossibleToTrainTheHero(currentHero)){

@@ -22,21 +22,28 @@ export class AllHeroesComponent implements OnInit {
     private myDataService: MyDataService
   ) {}
 
-  async ngOnInit() {
+   ngOnInit() {
 
     this.localService.initialDataBaseToDefault();
-    const isUserLogged = this.localService.isUserLogged();
-    if (isUserLogged)
-    this.heroesData=getAllHeroes();
+
+     this.heroesData=getAllHeroes();
 
      this.heroesService.currentHeroesData.subscribe((currentUserHeroesData:hero[])=>{
-    this.currentHeroesData=currentUserHeroesData||this.myDataService.getAllUserHeroes();
-
+    this.currentHeroesData=currentUserHeroesData;
     })
+
+   this.loadUserHeroes()
 
   }
 
-
+  async loadUserHeroes(){
+    if(this.localService.isUserLogged()){
+      const array=await this.myDataService.getAllUserHeroes()
+      if(Array.isArray(array))
+      this.heroesService.currentHeroesData.next(array)
+   }
+   
+  }
 
   addHero(addedHero: any) {
     if(!this.heroesService.isAddedHeroPossible({...addedHero},[...this.currentHeroesData]))
