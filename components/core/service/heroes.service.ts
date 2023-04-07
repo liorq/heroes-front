@@ -54,8 +54,11 @@ export class HeroesService {
     }
 
         currentHero.amountOfTimeHeroTrained++;
-        currentHero.currentPower = Math.floor(
-        currentHero.currentPower * (1 + Math.random() * 0.1));
+
+        const powerIncrease = (new Date().getMinutes() % 10 + 1) / 100;
+        currentHero.currentPower = Math.floor(currentHero.currentPower * (1 + powerIncrease));
+
+
   }
 
   clickBtnHandler(currentHero: hero) {

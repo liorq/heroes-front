@@ -99,7 +99,9 @@ export class SignUpComponent implements OnInit {
 
   updateSubjects(){
     this.userInfoService.isUserLogged.next(true);
-    this.heroesService.currentHeroesData.next([])
+    this.heroesService.updateHeroesSubject([])
+
+    
   }
 
 }

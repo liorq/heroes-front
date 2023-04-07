@@ -52,6 +52,7 @@ export class SignInComponent implements OnInit {
 
   updateSubjects(heroes:any[]){
     this.userInfoService.isUserLogged.next(true);
-    this.heroesService.currentHeroesData.next(heroes)
+    this.heroesService.updateHeroesSubject(heroes)
+
   }
 }

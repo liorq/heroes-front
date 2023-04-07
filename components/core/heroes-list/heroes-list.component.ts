@@ -31,7 +31,8 @@ export class HeroesListComponent {
 
   updateSubject(){
   if(this.currentHeroesData)
-    this.heroesService.currentHeroesData.next(this.currentHeroesData)
+  this.heroesService.updateHeroesSubject(this.currentHeroesData)
+
 }
   sortHeroes(){
     if(this.heroes)
