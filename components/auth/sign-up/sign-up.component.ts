@@ -10,9 +10,10 @@ import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { LocalService } from 'src/app/components/core/service/local.service';
 import { UserInfoService } from 'src/app/components/core/service/user-info.service';
-import { messages } from 'src/app/app.messages';
+import { messages } from 'src/app/components/data/app.messages';
 import { HeroesService } from 'src/app/components/core/service/heroes.service';
 import { MyDataService } from '../../core/service/myData.service';
+import { errorMessages } from '../../data/objects';
 
 @Component({
   selector: 'app-sign-up',
@@ -31,19 +32,12 @@ export class SignUpComponent implements OnInit {
     private myDataService: MyDataService
   ) {}
   subscribeForm!: FormGroup;
-  firstName: any;
-  lastName: any;
-  age: any;
-  email: any;
-  password: any;
-  errorMessages = {
-    password:
-      'The password needs to contain at least 8 characters, at least one uppercase letter, at least one number, and at least one special character',
-    age: 'You must be at least 12 years old to signup.',
-    email: 'Invalid email address. Please enter a valid email address.',
-    lastName: 'Last name must be at least 4 characters.',
-    firstName: 'First name must be at least 4 characters.',
-  };
+  firstName!: AbstractControl<any, any> | null;
+  lastName!: AbstractControl<any, any> | null;
+  age!: AbstractControl<any, any> | null;
+  email!: AbstractControl<any, any> | null;
+  password!: AbstractControl<any, any> | null;
+  errorMessages = errorMessages
 
   ngOnInit(): void {
     this.formInitialization();
@@ -72,21 +66,17 @@ export class SignUpComponent implements OnInit {
     this.password = this.subscribeForm.get('password');
   }
 
-
-  ////handler
   async signUpHandler() {
     this.localService.initialDataBaseToDefault();
-    const newUser = { ...this.subscribeForm.value };
-    const hashedPassword= this.userInfoService.getEncryptedPassword(newUser.password)
-      const isUserAvailable = await this.myDataService.signUp(newUser.email, hashedPassword);
-      if (isUserAvailable) {
-        await this.myDataService.signInHandler(newUser.email,hashedPassword);
-        this.updateSubjects()
-        setTimeout(() => {
-          this.router.navigate(['/myHeroes']);
-        }, 2000);
-      }
-        Swal.fire(isUserAvailable?messages.usernameAddedMessage:messages.usernameIsntAvailableMessage)
+    const { email, password } = this.subscribeForm.value;
+    const hashedPassword = this.userInfoService.getEncryptedPassword(password);
+    const isUserAvailable = await this.myDataService.signUp(email, hashedPassword);
+    if (isUserAvailable) {
+      await this.myDataService.signInHandler(email, hashedPassword);
+      this.updateSubjects();
+      setTimeout(() => this.router.navigate(['/myHeroes']), 2000);
+    }
+    Swal.fire(isUserAvailable ? messages.usernameAddedMessage : messages.usernameIsntAvailableMessage);
   }
 
   updateSubjects(){

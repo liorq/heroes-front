@@ -4,7 +4,7 @@ import { HeroesService } from 'src/app/components/core/service/heroes.service';
 import { LocalService } from 'src/app/components/core/service/local.service';
 import { UserInfoService } from 'src/app/components/core/service/user-info.service';
 import Swal from 'sweetalert2';
-import { messages} from '../../../app.messages';
+import { messages} from '../../data/app.messages';
 import { MyDataService } from '../../core/service/myData.service';
 
 @Component({
@@ -29,22 +29,20 @@ export class SignInComponent implements OnInit {
     this.localService.initialDataBaseToDefault();
 
   }
+////validtionHandler
+  async validtionHandler() {
 
- async isValidUserInformation() {
-    const user ={
-      userName:this.userName,
-      Password: this.userInfoService.getEncryptedPassword(this.Password),
-    }
-    const isValidInfo= await this.myDataService.signInHandler(user.userName,user.Password)
+    const hashedPassword=this.userInfoService.getEncryptedPassword(this.Password)
+    const isValidInfo= await this.myDataService.signInHandler(this.userName,hashedPassword)
     if(isValidInfo){
     const heroes:any= await this.myDataService.getAllUserHeroes()
      this.updateSubjects(heroes)
      this.router.navigate(['/myHeroes']);
      return
      }
+     Swal.fire(messages.usernameIncorrectMessage);
 
-       Swal.fire(messages.usernameIncorrectMessage);
-  }
+    }
 
   updateSubjects(heroes:any[]){
     this.userInfoService.updateSubjectIsUserLogged(true)

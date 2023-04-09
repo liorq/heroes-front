@@ -1,4 +1,5 @@
 @import url(https://fonts.googleapis.com/css?family=Monoton);
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
 .headline {
   margin-bottom: 1rem;
   font-size: 1.5rem;
@@ -22,6 +23,7 @@
 
 .input-text__inavlid {
   border: 1px solid #d90429;
+  font-family: 'Poppins', sans-serif;
 }
 
 .inline-block {
@@ -47,7 +49,8 @@
 
 .invalid-message {
   color: #d90429;
-  font-size: 1.2rem;
+  font-size: 1rem;
+  font-family: 'Poppins', sans-serif;
 }
 
 .nav-container {

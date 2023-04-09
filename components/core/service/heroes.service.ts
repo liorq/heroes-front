@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
 import Swal from 'sweetalert2';
 import { hero } from '../../data/app.interfaces';
-import {messages} from '../../../app.messages';
+import {messages} from '../../data/app.messages';
 @Injectable({
   providedIn: 'root',
 })
@@ -59,13 +59,11 @@ export class HeroesService {
     }
 
         currentHero.amountOfTimeHeroTrained++;
-
         const powerIncrease = (new Date().getMinutes() % 10 + 1) / 100;
         currentHero.currentPower = Math.floor(currentHero.currentPower * (1 + powerIncrease));
 
 
   }
-////trainHeroHandler
 trainHeroHandler(currentHero: hero) {
 
     if(!this.IsPossibleToTrainTheHero(currentHero))

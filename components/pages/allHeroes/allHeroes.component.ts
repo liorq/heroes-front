@@ -55,7 +55,7 @@ export class AllHeroesComponent implements OnInit {
        return
       this.myDataService.addHero(addedHero.name)
       addedHero.id = Math.floor(Math.random() * 1000000000);
-      this.currentHeroesData.push(addedHero)
+      this.currentHeroesData.push({...addedHero})
       this.heroesService.updateCurrentHeroesSubject([... this.currentHeroesData])
 
     }
