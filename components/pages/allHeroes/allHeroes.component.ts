@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { getAllHeroes } from 'src/app/components/data/app-heroes';
 import { hero } from 'src/app/components/data/app.interfaces';
 import { HeroesService } from 'src/app/components/core/service/heroes.service';
 import { LocalService } from 'src/app/components/core/service/local.service';

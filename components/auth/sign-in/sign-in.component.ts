@@ -32,11 +32,10 @@ export class SignInComponent implements OnInit {
 
  async isValidUserInformation() {
     const user ={
-      user:this.userName,
-      password:this.Password,
+      userName:this.userName,
+      Password: this.userInfoService.getEncryptedPassword(this.Password),
     }
-
-    const isValidInfo= await this.myDataService.signInHandler(this.userName,this.Password)
+    const isValidInfo= await this.myDataService.signInHandler(user.userName,user.Password)
     if(isValidInfo){
     const heroes:any= await this.myDataService.getAllUserHeroes()
      this.updateSubjects(heroes)

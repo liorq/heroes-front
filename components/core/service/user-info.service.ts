@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { hero } from '../../data/app.interfaces';
 import { AbstractControl, ValidationErrors } from '@angular/forms';
+import * as CryptoJS from 'crypto-js';
 
 
 @Injectable({
@@ -30,5 +30,8 @@ export class UserInfoService {
       /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
     const isValidPassword = !passwordRegex.test(control.value);
     return isValidPassword ? { passwordInvalid: true } : null;
+  }
+  getEncryptedPassword(password:string){
+    return CryptoJS.SHA256(password).toString();
   }
 }

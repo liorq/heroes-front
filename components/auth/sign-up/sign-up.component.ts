@@ -77,10 +77,10 @@ export class SignUpComponent implements OnInit {
   async signUpHandler() {
     this.localService.initialDataBaseToDefault();
     const newUser = { ...this.subscribeForm.value };
-
-      const isUserAvailable = await this.myDataService.signUp(newUser.email, newUser.password);
+    const hashedPassword= this.userInfoService.getEncryptedPassword(newUser.password)
+      const isUserAvailable = await this.myDataService.signUp(newUser.email, hashedPassword);
       if (isUserAvailable) {
-        await this.myDataService.signInHandler(newUser.email, newUser.password);
+        await this.myDataService.signInHandler(newUser.email,hashedPassword);
         this.updateSubjects()
         setTimeout(() => {
           this.router.navigate(['/myHeroes']);
