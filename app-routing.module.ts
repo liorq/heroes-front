@@ -5,7 +5,7 @@ import { SignUpComponent } from './components/auth/sign-up/sign-up.component';
 import { SignInComponent } from './components/auth/sign-in/sign-in.component';
 import { PageNotFoundComponent } from './components/pages/page-not-found/page-not-found.component';
 import { AllHeroesComponent } from './components/pages/allHeroes/allHeroes.component';
-import { AuthGuard } from './auth.guard';
+import { AuthGuard } from './components/core/guards/auth.guard';
 const routes: Routes = [
   { path: 'signUp', component: SignUpComponent },
   { path: 'myHeroes', component: MyHeroesComponent, canActivate: [AuthGuard] },

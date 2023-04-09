@@ -2,11 +2,11 @@ export interface hero {
   name: string;
   ability: string;
   id: number;
-  firstDayHeroTrained: any;
+  firstDayHeroTrained: number|string;
   suitColors: string;
   startingPower: number;
   currentPower: number;
-  lastTimeHeroTrained: any;
+  lastTimeHeroTrained: string;
   amountOfTimeHeroTrained: number;
 }
 export interface user {

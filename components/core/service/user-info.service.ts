@@ -12,6 +12,7 @@ export class UserInfoService {
 
    isUserLogged = new BehaviorSubject<boolean>(false);
   _isUserLogged = this.isUserLogged.asObservable();
+  
   updateSubjectIsUserLogged(status:boolean){
     this.isUserLogged.next(status);
   }

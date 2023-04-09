@@ -10,8 +10,8 @@ import {messages} from '../../data/app.messages';
 export class HeroesService {
 
   private currentHeroesData=new BehaviorSubject<hero[]>([]);
-  _currentHeroesData = this.currentHeroesData.asObservable();
   private allHeroes=new BehaviorSubject<hero[]>([]);
+  _currentHeroesData = this.currentHeroesData.asObservable();
   _allHeroes= this.allHeroes.asObservable();
 
   updateCurrentHeroesSubject(currentHeroesData:hero[]){
