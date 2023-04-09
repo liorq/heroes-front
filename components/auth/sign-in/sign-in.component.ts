@@ -37,7 +37,6 @@ export class SignInComponent implements OnInit {
     }
 
     const isValidInfo= await this.myDataService.signInHandler(this.userName,this.Password)
-    console.log(isValidInfo)
     if(isValidInfo){
     const heroes:any= await this.myDataService.getAllUserHeroes()
      this.updateSubjects(heroes)
@@ -45,14 +44,11 @@ export class SignInComponent implements OnInit {
      return
      }
 
-
-
        Swal.fire(messages.usernameIncorrectMessage);
   }
 
   updateSubjects(heroes:any[]){
-    this.userInfoService.isUserLogged.next(true);
-    this.heroesService.updateHeroesSubject(heroes)
-
+    this.userInfoService.updateSubjectIsUserLogged(true)
+    this.heroesService.updateCurrentHeroesSubject(heroes)
   }
 }

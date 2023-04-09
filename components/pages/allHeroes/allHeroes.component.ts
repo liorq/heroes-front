@@ -26,23 +26,30 @@ export class AllHeroesComponent implements OnInit {
 
     this.localService.initialDataBaseToDefault();
 
-     this.heroesData=getAllHeroes();
-
-     this.heroesService._currentHeroesData.subscribe((currentUserHeroesData:hero[])=>{
+    this.heroesService._currentHeroesData.subscribe((currentUserHeroesData:hero[])=>{
     this.currentHeroesData=currentUserHeroesData;
     })
+    this.heroesService._allHeroes.subscribe((heroesData)=>{
+      this.heroesData=heroesData;
+    })
+
    this.loadUserHeroes()
 
   }
 
   async loadUserHeroes(){
     if(this.localService.isUserLogged()&&this.currentHeroesData.length == 0){
-      const array=await this.myDataService.getAllUserHeroes()
-      if(Array.isArray(array))
-      this.heroesService.updateHeroesSubject(array)
+      const [userHeroes, allHeroes] = await Promise.all([
+        this.myDataService.getAllUserHeroes(),
+        this.myDataService.getAllHeroes()
+      ]);
 
+      if(Array.isArray(userHeroes)&&Array.isArray(allHeroes)){
+        this.heroesService.updateCurrentHeroesSubject(userHeroes)
+        console.log(allHeroes)
+        this.heroesService.updateAllHeroesSubject(allHeroes)
+      }
    }
-
   }
 
   addHero(addedHero: any) {
@@ -51,7 +58,7 @@ export class AllHeroesComponent implements OnInit {
       this.myDataService.addHero(addedHero.name)
       addedHero.id = Math.floor(Math.random() * 1000000000);
       this.currentHeroesData.push(addedHero)
-      this.heroesService.updateHeroesSubject([... this.currentHeroesData])
+      this.heroesService.updateCurrentHeroesSubject([... this.currentHeroesData])
 
     }
 

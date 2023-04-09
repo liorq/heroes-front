@@ -11,10 +11,15 @@ export class HeroesService {
 
   private currentHeroesData=new BehaviorSubject<hero[]>([]);
   _currentHeroesData = this.currentHeroesData.asObservable();
+  private allHeroes=new BehaviorSubject<hero[]>([]);
+  _allHeroes= this.allHeroes.asObservable();
 
-  updateHeroesSubject(currentHeroesData:hero[]){
+  updateCurrentHeroesSubject(currentHeroesData:hero[]){
   this.currentHeroesData.next(currentHeroesData)
   }
+  updateAllHeroesSubject(allHeroes:hero[]){
+    this.allHeroes.next(allHeroes)
+    }
   isAddedHeroPossible(addedHero: hero,HeroesData:hero[]){
 
     const isHeroExists = HeroesData.some(hero => hero.name === addedHero.name);
@@ -76,5 +81,6 @@ export class HeroesService {
     const day = dt.getDate().toString().padStart(2, '0');
     return `${year}-${month}-${day}`;
   }
+  
 
 }

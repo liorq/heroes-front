@@ -26,8 +26,10 @@ export class HeaderComponent implements OnInit {
     }
   }
   deleteUserInfo() {
+    this.userInfoService.updateSubjectIsUserLogged(false)
+
     this.userInfoService.isUserLogged.next(false);
-    this.heroesService.updateHeroesSubject([])
+    this.heroesService.updateCurrentHeroesSubject([])
     this.localService.setToken();
 
   }

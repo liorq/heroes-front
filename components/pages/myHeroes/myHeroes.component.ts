@@ -30,19 +30,24 @@ export class MyHeroesComponent implements OnInit {
      this.currentHeroesData = currentUserHeroesData;
 
     });
-
+   
       this.loadUserHeroes();
   }
   ////function that do next observable is called
   async loadUserHeroes(){
-
     if(this.localService.isUserLogged()&&this.currentHeroesData.length == 0){
-      const array=await this.myDataService.getAllUserHeroes()
-      if(Array.isArray(array))
-      this.heroesService.updateHeroesSubject(array)
+      const [userHeroes, allHeroes] = await Promise.all([
+        this.myDataService.getAllUserHeroes(),
+        this.myDataService.getAllHeroes()
+      ]);
 
+      if(Array.isArray(userHeroes)&&Array.isArray(allHeroes)){
+        this.heroesService.updateCurrentHeroesSubject(userHeroes)
+        this.heroesService.updateAllHeroesSubject(allHeroes)
+      }
    }
   }
+
   clickBtnHandler(currentHero: any) {
 
     if(this.heroesService.IsPossibleToTrainTheHero(currentHero)){

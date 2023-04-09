@@ -11,8 +11,6 @@ export class LocalService {
       return token !== null && token !== undefined&&token!="";
     }
 
-
-
   setToken() {
     return localStorage.setItem('token' ,"");
   }

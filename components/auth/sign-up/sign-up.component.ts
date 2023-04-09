@@ -60,7 +60,7 @@ export class SignUpComponent implements OnInit {
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [
         Validators.required,
-        this.passwordValidator,
+        this.userInfoService.passwordValidator,
         Validators.minLength(8),
       ]),
     });
@@ -72,12 +72,7 @@ export class SignUpComponent implements OnInit {
     this.password = this.subscribeForm.get('password');
   }
 
-  passwordValidator(control: AbstractControl): ValidationErrors | null {
-    const passwordRegex =
-      /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-    const isValidPassword = !passwordRegex.test(control.value);
-    return isValidPassword ? { passwordInvalid: true } : null;
-  }
+
   ////handler
   async signUp() {
     this.localService.initialDataBaseToDefault();
@@ -91,17 +86,12 @@ export class SignUpComponent implements OnInit {
           this.router.navigate(['/myHeroes']);
         }, 2000);
       }
-      console.log( isUserAvailable )
         Swal.fire(isUserAvailable?messages.usernameAddedMessage:messages.usernameIsntAvailableMessage)
   }
 
-
-
   updateSubjects(){
-    this.userInfoService.isUserLogged.next(true);
-    this.heroesService.updateHeroesSubject([])
-
-    
+    this.userInfoService.updateSubjectIsUserLogged(true)
+    this.heroesService.updateCurrentHeroesSubject([])
   }
 
 }

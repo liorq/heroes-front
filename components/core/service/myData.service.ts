@@ -97,6 +97,16 @@ headerInit (){
   });
 
 }
+getAllHeroes(){
+  const headers = this.headerInit();
 
+  try{
+  const response= this.http.get(this.apiUrl).toPromise()
+  return response
+  }
+  catch(error){
+  return false;
+  }
+}
 
 }
