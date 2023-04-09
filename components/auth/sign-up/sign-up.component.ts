@@ -74,7 +74,7 @@ export class SignUpComponent implements OnInit {
 
 
   ////handler
-  async signUp() {
+  async signUpHandler() {
     this.localService.initialDataBaseToDefault();
     const newUser = { ...this.subscribeForm.value };
 

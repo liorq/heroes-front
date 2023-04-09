@@ -14,7 +14,7 @@ import { MyDataService } from '../service/myData.service';
     '../../pages/myHeroes/myHeroes.component.css'
   ],
 })
-export class HeroesListComponent {
+export class HeroesListComponent implements OnInit {
   /////dont remove 3 of this
   constructor(
     public heroesService: HeroesService,
@@ -28,7 +28,9 @@ export class HeroesListComponent {
   @Input() displayBtnTitle?: string = '';
   @Input() componentName:string=""
   @Input() currentHeroesData: any[] = [];
-
+ngOnInit(): void {
+  this.sortHeroes()
+}
   updateSubject(){
   if(this.currentHeroesData)
   this.heroesService.updateCurrentHeroesSubject(this.currentHeroesData)

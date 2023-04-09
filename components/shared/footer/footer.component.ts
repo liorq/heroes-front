@@ -7,7 +7,6 @@ import Swal from 'sweetalert2';
 })
 export class FooterComponent {
   onclickCallUs() {
-    '05052356595'
     Swal.fire('05052356595');
   }
 }

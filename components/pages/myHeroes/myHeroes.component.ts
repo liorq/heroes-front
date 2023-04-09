@@ -28,12 +28,11 @@ export class MyHeroesComponent implements OnInit {
 
     this.heroesService._currentHeroesData.subscribe((currentUserHeroesData: hero[]) => {
      this.currentHeroesData = currentUserHeroesData;
-
     });
-   
+
       this.loadUserHeroes();
   }
-  ////function that do next observable is called
+
   async loadUserHeroes(){
     if(this.localService.isUserLogged()&&this.currentHeroesData.length == 0){
       const [userHeroes, allHeroes] = await Promise.all([
@@ -51,7 +50,7 @@ export class MyHeroesComponent implements OnInit {
   clickBtnHandler(currentHero: any) {
 
     if(this.heroesService.IsPossibleToTrainTheHero(currentHero)){
-      this.heroesService.clickBtnHandler(currentHero);
+      this.heroesService.trainHeroHandler(currentHero);
       this.myDataService.trainHero(currentHero.name)
     }
   }

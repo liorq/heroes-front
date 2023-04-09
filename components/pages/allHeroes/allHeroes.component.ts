@@ -46,13 +46,12 @@ export class AllHeroesComponent implements OnInit {
 
       if(Array.isArray(userHeroes)&&Array.isArray(allHeroes)){
         this.heroesService.updateCurrentHeroesSubject(userHeroes)
-        console.log(allHeroes)
         this.heroesService.updateAllHeroesSubject(allHeroes)
       }
    }
   }
 
-  addHero(addedHero: any) {
+  addHeroHandler(addedHero: any) {
     if(!this.heroesService.isAddedHeroPossible({...addedHero},[...this.currentHeroesData]))
        return
       this.myDataService.addHero(addedHero.name)

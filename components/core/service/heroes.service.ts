@@ -65,8 +65,8 @@ export class HeroesService {
 
 
   }
-
-  clickBtnHandler(currentHero: hero) {
+////trainHeroHandler
+trainHeroHandler(currentHero: hero) {
 
     if(!this.IsPossibleToTrainTheHero(currentHero))
       return false
@@ -81,6 +81,6 @@ export class HeroesService {
     const day = dt.getDate().toString().padStart(2, '0');
     return `${year}-${month}-${day}`;
   }
-  
+
 
 }
