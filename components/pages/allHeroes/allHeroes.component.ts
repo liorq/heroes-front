@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { hero } from 'src/app/components/data/app.interfaces';
 import { HeroesService } from 'src/app/components/core/service/heroes.service';
 import { LocalService } from 'src/app/components/core/service/local.service';
-import { UserInfoService } from 'src/app/components/core/service/user-info.service';
 import { MyDataService } from '../../core/service/myData.service';
 @Component({
   selector: 'app-main',
@@ -17,7 +16,6 @@ export class AllHeroesComponent implements OnInit {
   constructor(
     private heroesService: HeroesService,
     private localService: LocalService,
-    private userInfoService: UserInfoService,
     private myDataService: MyDataService
   ) {}
 

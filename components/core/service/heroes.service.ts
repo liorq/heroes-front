@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Subject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import Swal from 'sweetalert2';
 import { hero } from '../../data/app.interfaces';
 import {messages} from '../../data/app.messages';
@@ -29,9 +29,7 @@ export class HeroesService {
 
 
   getHeroPicture(hero: hero) {
-    const obj: any = {};
-    obj[hero.name] = true;
-    return obj;
+    return {[hero.name]:true}
   }
 
 

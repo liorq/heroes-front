@@ -25,7 +25,6 @@ export class MyHeroesComponent implements OnInit {
 
   ngOnInit() {
     this.localService.initialDataBaseToDefault();
-
     this.heroesService._currentHeroesData.subscribe((currentUserHeroesData: hero[]) => {
      this.currentHeroesData = currentUserHeroesData;
     });
@@ -48,12 +47,10 @@ export class MyHeroesComponent implements OnInit {
   }
 
   clickBtnHandler(currentHero: any) {
-
     if(this.heroesService.IsPossibleToTrainTheHero(currentHero)){
       this.heroesService.trainHeroHandler(currentHero);
       this.myDataService.trainHero(currentHero.name)
     }
   }
-
 
 }
